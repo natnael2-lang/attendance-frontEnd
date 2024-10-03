@@ -1,0 +1,6 @@
+token=
+apiKey=AIzaSyCpIfVU5o0tRBoCvC9I7u6mvRbaUlJeau4;
+channelId=UCKts5oKO7pJU1ZpfabiUyrg
+userName=@natnaelmessay7906
+channel2=UC_x5XG1OV2P6uZZ5FSM9Ttw
+clientId=252946928653-ne97ommf1edcrsgrugtr31s8ddruau15.apps.googleusercontent.com
