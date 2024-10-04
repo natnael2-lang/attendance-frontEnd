@@ -7,92 +7,100 @@ const REGENERATION_TIME = 2 * 60 * 60 * 1000; // 2 hours in milliseconds
 const DollarAirdrop = () => {
   const [dollars, setDollars] = useState([]);
   const [isPressed, setIsPressed] = useState(false);
-  const [totalDollars, setTotalDollars] = useState(0); // Start with 0 dollars collected
-  const [tankLevel, setTankLevel] = useState(MAX_DOLLARS); // Start tank full
+  const [totalDollars, setTotalDollars] = useState(0);
+  const [tankLevel, setTankLevel] = useState(MAX_DOLLARS);
+  const [initialLoadTime, setInitialLoadTime] = useState(Date.now());
 
   const handleMouseDown = (e) => {
-    setIsPressed(true); // Set pressed state when mouse is down
+    setIsPressed(true);
   };
 
   const handleMouseUp = (e) => {
-    setIsPressed(false); // Reset pressed state when mouse is released
+    setIsPressed(false);
 
     if (tankLevel > 0) {
-      const coinX = e.clientX; // X coordinate of the click
-      const coinY = e.clientY; // Y coordinate of the click
+      const coinX = e.clientX;
+      const coinY = e.clientY;
 
       const newDollar = {
-        id: Date.now(), // Unique ID for each dollar sign
-        left: coinX - 15, // Center the dollar sign
-        top: coinY, // Start from the clicked position
+        id: Date.now(),
+        left: coinX - 15,
+        top: coinY,
+        animate: true,
       };
 
       setDollars((prevDollars) => {
         const updatedDollars = [...prevDollars, newDollar];
-        localStorage.setItem('dollars', JSON.stringify(updatedDollars)); // Store dollars in local storage
+        localStorage.setItem('dollars', JSON.stringify(updatedDollars));
         return updatedDollars;
       });
       setTotalDollars((prevTotal) => {
-        const newTotal = prevTotal + 10; // Increase dollar count
-        localStorage.setItem('totalDollars', newTotal); // Store total dollars in local storage
+        const newTotal = prevTotal + 10;
+        localStorage.setItem('totalDollars', newTotal);
         return newTotal;
       });
       setTankLevel((prevLevel) => {
-        const newLevel = Math.max(prevLevel - 10, 0); // Decrease tank level
-        localStorage.setItem('tankLevel', newLevel); // Store tank level in local storage
+        const newLevel = Math.max(prevLevel - 10, 0);
+        localStorage.setItem('tankLevel', newLevel);
         return newLevel;
       });
     }
   };
 
   useEffect(() => {
-    // Load stored values from local storage
-    const storedDollars = JSON.parse(localStorage.getItem('dollars')) || [];
     const storedTotalDollars = parseInt(localStorage.getItem('totalDollars')) || 0;
     const storedTankLevel = parseInt(localStorage.getItem('tankLevel')) || MAX_DOLLARS;
 
-    setDollars(storedDollars);
     setTotalDollars(storedTotalDollars);
     setTankLevel(storedTankLevel);
 
-    // Set up regeneration timer to refill the tank over 2 hours
+    // Calculate how much should have been added to the tank based on the fixed initial load time
+    const timeElapsed = Date.now() - initialLoadTime;
+    const addedAmount = Math.floor((timeElapsed / (REGENERATION_TIME / MAX_DOLLARS)) * 10);
+    setTankLevel((prevLevel) => {
+      const newLevel = Math.min(prevLevel + addedAmount, MAX_DOLLARS);
+      localStorage.setItem('tankLevel', newLevel);
+      return newLevel;
+    });
+
+    // Set up regeneration timer
     const interval = setInterval(() => {
       setTankLevel((prevLevel) => {
-        const newLevel = Math.min(prevLevel + 10, MAX_DOLLARS); // Refill tank level
-        localStorage.setItem('tankLevel', newLevel); // Update local storage
+        const newLevel = Math.min(prevLevel + 10, MAX_DOLLARS);
+        localStorage.setItem('tankLevel', newLevel);
         return newLevel;
       });
-    }, REGENERATION_TIME / MAX_DOLLARS); // Increment every (2 hours / MAX_DOLLARS) milliseconds
+    }, REGENERATION_TIME / MAX_DOLLARS);
 
     return () => {
-      clearInterval(interval); // Cleanup interval on unmount
+      clearInterval(interval);
     };
-  }, []);
+  }, [initialLoadTime]);
 
-  // Calculate the percentage of the tank filled
   const tankLevelPercentage = (tankLevel / MAX_DOLLARS) * 100;
 
   return (
     <div style={styles.container}>
       <div style={styles.counter}>Dollars Collected: {totalDollars}</div>
-      <img 
-        src={coinImage} 
-        alt="Coin" 
-        style={isPressed ? styles.coinPressed : styles.coin} 
-        onMouseDown={handleMouseDown} 
-        onMouseUp={handleMouseUp} 
+      <img
+        src={coinImage}
+        alt="Coin"
+        style={isPressed ? styles.coinPressed : styles.coin}
+        onMouseDown={handleMouseDown}
+        onMouseUp={handleMouseUp}
       />
       {dollars.map((dollar) => (
-        <div 
-          key={dollar.id} 
+        <div
+          key={dollar.id}
           style={{
-            ...styles.dollar, 
-            left: dollar.left, 
+            ...styles.dollar,
+            left: dollar.left,
             top: dollar.top,
-            animation: 'floatUp 2s ease forwards', // Upward animation
-          }} 
+            animation: dollar.animate ? 'floatUp 2s ease forwards' : 'none',
+            display: dollar.animate ? 'block' : 'none',
+          }}
         >
-          +10
+          {dollar.animate ? '+10' : null}
         </div>
       ))}
       <div style={styles.tank}>
@@ -102,7 +110,7 @@ const DollarAirdrop = () => {
         {`
           @keyframes floatUp {
             0% { transform: translateY(0); }
-            100% { transform: translateY(-100vh); } /* Move out of the viewport */
+            100% { transform: translateY(-100vh); }
           }
         `}
       </style>
@@ -135,43 +143,43 @@ const styles = {
   },
   tank: {
     position: 'absolute',
-    bottom: '20px', // Position the tank at the bottom with some margin
-    width: '150px', // Width of the tank (narrower)
-    height: '30px', // Height of the tank
-    backgroundColor: '#e0e0e0', // Tank background color
+    bottom: '20px',
+    width: '150px',
+    height: '30px',
+    backgroundColor: '#e0e0e0',
     borderRadius: '10px',
     overflow: 'hidden',
-    margin: '20px 0'
+    margin: '20px 0',
   },
   loader: {
     position: 'absolute',
     height: '100%',
-    backgroundColor: '#76c7c0', // Loader color
-    transition: 'width 0.5s ease', // Smooth transition for sliding effect
+    backgroundColor: '#76c7c0',
+    transition: 'width 0.5s ease',
   },
   coin: {
     position: 'absolute',
-    width: '100px', // Adjust the size as necessary
-    height: '100px', // Adjust the size as necessary
+    width: '100px',
+    height: '100px',
     left: '50%',
     top: '50%',
-    transform: 'translate(-50%, -50%)', // Center the coin
-    transition: 'transform 0.1s', // Smooth transition for press effect
+    transform: 'translate(-50%, -50%)',
+    transition: 'transform 0.1s',
   },
   coinPressed: {
     position: 'absolute',
-    width: '100px', // Adjust the size as necessary
-    height: '100px', // Adjust the size as necessary
+    width: '100px',
+    height: '100px',
     left: '50%',
     top: '50%',
-    transform: 'translate(-50%, -50%) scale(0.95)', // Scale down for pressed effect
-    transition: 'transform 0.1s', // Smooth transition for press effect
+    transform: 'translate(-50%, -50%) scale(0.95)',
+    transition: 'transform 0.1s',
   },
   dollar: {
     position: 'absolute',
-    fontSize: '30px', // Adjust the dollar sign size
+    fontSize: '30px',
     userSelect: 'none',
-    pointerEvents: 'none', // Prevent mouse events on dollar signs
+    pointerEvents: 'none',
   },
 };
 
