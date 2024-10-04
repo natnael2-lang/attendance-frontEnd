@@ -27,16 +27,41 @@ const DollarAirdrop = () => {
         top: coinY, // Start from the clicked position
       };
 
-      setDollars((prevDollars) => [...prevDollars, newDollar]);
-      setTotalDollars((prevTotal) => prevTotal + 10); // Increase dollar count
-      setTankLevel((prevLevel) => Math.max(prevLevel - 10, 0)); // Decrease tank level
+      setDollars((prevDollars) => {
+        const updatedDollars = [...prevDollars, newDollar];
+        localStorage.setItem('dollars', JSON.stringify(updatedDollars)); // Store dollars in local storage
+        return updatedDollars;
+      });
+      setTotalDollars((prevTotal) => {
+        const newTotal = prevTotal + 10; // Increase dollar count
+        localStorage.setItem('totalDollars', newTotal); // Store total dollars in local storage
+        return newTotal;
+      });
+      setTankLevel((prevLevel) => {
+        const newLevel = Math.max(prevLevel - 10, 0); // Decrease tank level
+        localStorage.setItem('tankLevel', newLevel); // Store tank level in local storage
+        return newLevel;
+      });
     }
   };
 
   useEffect(() => {
+    // Load stored values from local storage
+    const storedDollars = JSON.parse(localStorage.getItem('dollars')) || [];
+    const storedTotalDollars = parseInt(localStorage.getItem('totalDollars')) || 0;
+    const storedTankLevel = parseInt(localStorage.getItem('tankLevel')) || MAX_DOLLARS;
+
+    setDollars(storedDollars);
+    setTotalDollars(storedTotalDollars);
+    setTankLevel(storedTankLevel);
+
     // Set up regeneration timer to refill the tank over 2 hours
     const interval = setInterval(() => {
-      setTankLevel((prevLevel) => Math.min(prevLevel + 10, MAX_DOLLARS)); // Refill tank level
+      setTankLevel((prevLevel) => {
+        const newLevel = Math.min(prevLevel + 10, MAX_DOLLARS); // Refill tank level
+        localStorage.setItem('tankLevel', newLevel); // Update local storage
+        return newLevel;
+      });
     }, REGENERATION_TIME / MAX_DOLLARS); // Increment every (2 hours / MAX_DOLLARS) milliseconds
 
     return () => {
