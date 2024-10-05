@@ -1,47 +1,33 @@
-import React, { useState } from 'react';
-import "../CSS/Friend.css";
+import React, { useEffect, useState } from 'react';
 
 const Friends = () => {
-    const [inviteLink, setInviteLink] = useState('');
+    const [userData, setUserData] = useState(null);
 
-    const handleInviteClick = async () => {
-        try {
-            const response = await fetch('/generate-invite-link', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            });
-
-            const data = await response.json();
-            if (data.link) {
-                setInviteLink(data.link); // Set the invite link
-            } else {
-                console.error('No link returned from the server');
-            }
-        } catch (error) {
-            console.error('Error generating invite link:', error);
+    useEffect(() => {
+        // Check if the Telegram WebApp is available
+        if (window.Telegram && window.Telegram.WebApp) {
+            // Fetch user data from Telegram's Web Apps API
+            const user = window.Telegram.WebApp.initDataUnsafe.user;
+            setUserData(user);
         }
-    };
-
-    const handleCopyClick = () => {
-        navigator.clipboard.writeText(inviteLink) // Copy the invite link to clipboard
-            .then(() => {
-                alert('Invite link copied to clipboard!'); // Alert to confirm copy
-            })
-            .catch(err => {
-                console.error('Failed to copy: ', err);
-            });
-    };
+    }, []);
 
     return (
-        <div className="friend-container">
-            <button onClick={handleInviteClick}>Generate Invite Link</button>
-            {inviteLink && (
-                <div className="invite-link-container">
-                    <p>{inviteLink}</p>
-                    <button onClick={handleCopyClick}>Copy</button>
+        <div style={{ textAlign: 'center', padding: '20px' }}>
+            <h1>Telegram User Information</h1>
+            {userData ? (
+                <div>
+                    <h2>User Information</h2>
+                    <p><strong>ID:</strong> {userData.id}</p>
+                    <p><strong>First Name:</strong> {userData.first_name}</p>
+                    <p><strong>Last Name:</strong> {userData.last_name}</p>
+                    <p><strong>Username:</strong> {userData.username}</p>
+                    {userData.photo_url && (
+                        <img src={userData.photo_url} alt="User" style={{ borderRadius: '50%', width: '100px' }} />
+                    )}
                 </div>
+            ) : (
+                <p>Loading user data...</p>
             )}
         </div>
     );
