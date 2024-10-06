@@ -5,7 +5,8 @@ const Friends = () => {
     const [userId, setUserId] = useState('');
 
     useEffect(() => {
-        // Check if Telegram WebApp is available
+        console.log('Telegram:', Telegram); // Log the Telegram object
+
         if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
             console.log('Init Data Unsafe:', Telegram.WebApp.initDataUnsafe); // Log data for debugging
             const user = Telegram.WebApp.initDataUnsafe.user;
