@@ -11,7 +11,7 @@ const App = () => {
     <div style={{ height: "100vh", overflowX: "hidden",display:"flex" ,flexDirection:"column"}}>
       <Router>
         <Routes>
-          <Route path="/" element={<Friends />} />
+          <Route path="/" element={<Home />} />
           <Route path="/tasks" element={<Tasks />} />
           <Route path="/friends" element={<Friends />} />
           <Route path="/wallet" element={<Wallet />} />
