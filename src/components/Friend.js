@@ -5,23 +5,35 @@ const Friends = () => {
     const [userId, setUserId] = useState('');
 
     useEffect(() => {
-        console.log('Telegram:', Telegram); // Log the Telegram object
+        // Create and append the Telegram Web App script
+        const script = document.createElement('script');
+        script.src = 'https://telegram.org/js/telegram-web-app.js';
+        script.async = true;
+        document.body.appendChild(script);
 
-        if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
-            console.log('Init Data Unsafe:', Telegram.WebApp.initDataUnsafe); // Log data for debugging
-            const user = Telegram.WebApp.initDataUnsafe.user;
+        // Check if Telegram WebApp is available after the script has loaded
+        script.onload = () => {
+            if (typeof window.Telegram !== 'undefined' && window.Telegram.WebApp) {
+                console.log('Init Data Unsafe:', window.Telegram.WebApp.initDataUnsafe); // Log data for debugging
+                const user = window.Telegram.WebApp.initDataUnsafe.user;
 
-            if (user) {
-                setUsername(user.username || 'N/A');
-                setUserId(user.id);
+                if (user) {
+                    setUsername(user.username || 'N/A');
+                    setUserId(user.id);
+                } else {
+                    setUsername('User data not available.');
+                    setUserId('User data not available.');
+                }
             } else {
-                setUsername('User data not available.');
-                setUserId('User data not available.');
+                setUsername('Telegram WebApp is not available.');
+                setUserId('');
             }
-        } else {
-            setUsername('Telegram WebApp is not available.');
-            setUserId('');
-        }
+        };
+
+        // Cleanup function to remove the script when the component unmounts
+        return () => {
+            document.body.removeChild(script);
+        };
     }, []);
 
     const styles = {
