@@ -128,7 +128,7 @@ const DollarAirdrop = () => {
           state: { username, userId },
         }}
       >
-        Go to Friends
+       
       </Link>
       <style>
         {`
