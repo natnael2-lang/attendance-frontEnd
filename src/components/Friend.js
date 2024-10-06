@@ -1,38 +1,54 @@
 import React, { useEffect, useState } from 'react';
 
 const Friends = () => {
-    const [userData, setUserData] = useState(null);
-    const [error, setError] = useState(null);
+    const [username, setUsername] = useState('Loading...');
+    const [userId, setUserId] = useState('');
 
     useEffect(() => {
-        if (window.Telegram && window.Telegram.WebApp) {
-            const user = window.Telegram.WebApp.initDataUnsafe.user;
+        // Check if Telegram WebApp is available
+        if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
+            console.log('Init Data Unsafe:', Telegram.WebApp.initDataUnsafe); // Log data for debugging
+            const user = Telegram.WebApp.initDataUnsafe.user;
+
             if (user) {
-                setUserData(user);
+                setUsername(user.username || 'N/A');
+                setUserId(user.id);
             } else {
-                setError("User data not available.");
+                setUsername('User data not available.');
+                setUserId('User data not available.');
             }
         } else {
-            setError("Telegram Web App is not available.");
+            setUsername('Telegram WebApp is not available.');
+            setUserId('');
         }
     }, []);
 
+    const styles = {
+        body: {
+            fontFamily: 'Arial, sans-serif',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: '100vh',
+            backgroundColor: '#f2f2f2',
+            margin: 0,
+        },
+        userInfo: {
+            background: 'white',
+            padding: '20px',
+            borderRadius: '8px',
+            boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)',
+            textAlign: 'center',
+        },
+    };
+
     return (
-        <div style={{ textAlign: 'center', padding: '20px' }}>
-            <h1>Telegram User Information</h1>
-            {error ? (
-                <p style={{ color: 'red' }}>{error}</p>
-            ) : userData ? (
-                <div>
-                    <h2>User Information</h2>
-                    <p><strong>ID:</strong> {userData.id}</p>
-                    <p><strong>First Name:</strong> {userData.first_name}</p>
-                    <p><strong>Last Name:</strong> {userData.last_name}</p>
-                    <p><strong>Username:</strong> {userData.username}</p>
-                </div>
-            ) : (
-                <p>Loading user data...</p>
-            )}
+        <div style={styles.body}>
+            <div style={styles.userInfo}>
+                <h2>User Information</h2>
+                <p>{username}</p>
+                <p>{userId}</p>
+            </div>
         </div>
     );
 };
