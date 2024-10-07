@@ -168,8 +168,8 @@ const styles = {
   tank: {
     position: 'absolute',
     bottom: '20px',
-    width: '150px',
-    height: '30px',
+    width: '300px',
+    height: '15px',
     backgroundColor: '#e0e0e0',
     borderRadius: '10px',
     overflow: 'hidden',
@@ -201,7 +201,8 @@ const styles = {
   },
   dollar: {
     position: 'absolute',
-    fontSize: '30px',
+    fontSize: '15px',
+    color:"rgb(180,200,200)",
     userSelect: 'none',
     pointerEvents: 'none',
   },
