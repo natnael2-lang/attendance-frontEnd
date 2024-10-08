@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import coinImage from '../images/NatCoinn1.jpg'; // Ensure your coin image path is correct
+import coinImage from '../images/NatCoinn-removebg-preview.png'; // Ensure your coin image path is correct
 
 const MAX_DOLLARS = 2000;
 const REGENERATION_TIME = 2 * 60 * 60 * 1000; // 2 hours in milliseconds
@@ -196,14 +196,14 @@ const styles = {
     height: '150px',
     left: '50%',
     top: '50%',
-    transform: 'translate(-50%, -50%) scale(0.95)',
-    transition: 'transform 0.1s',
+    transform: 'translate(-50%, -50%) scale(0.92)',
+    transition: 'transform 0.01s',
     backgroundColor: 'black', // Set background color to black
   },
   dollar: {
     position: 'absolute',
-    fontSize: '15px',
-    color: "rgb(180,200,200)",
+    fontSize: '19px',
+    color: "rgb(250, 250, 235)",
     userSelect: 'none',
     pointerEvents: 'none',
   },
