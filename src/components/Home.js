@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import coinImage from '../images/NatCoinn-removebg-preview.png'; // Ensure your coin image path is correct
+import coinImage from '../images/NatCoinn1.jpg'; // Ensure your coin image path is correct
 
 const MAX_DOLLARS = 2000;
 const REGENERATION_TIME = 2 * 60 * 60 * 1000; // 2 hours in milliseconds
@@ -182,8 +182,8 @@ const styles = {
   },
   coin: {
     position: 'absolute',
-    width: '150px',
-    height: '150px',
+    width: '200px',
+    height: '200px',
     left: '50%',
     top: '50%',
     transform: 'translate(-50%, -50%)',
@@ -192,8 +192,8 @@ const styles = {
   },
   coinPressed: {
     position: 'absolute',
-    width: '100px',
-    height: '100px',
+    width: '150px',
+    height: '150px',
     left: '50%',
     top: '50%',
     transform: 'translate(-50%, -50%) scale(0.95)',
