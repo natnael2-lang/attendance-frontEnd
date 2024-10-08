@@ -161,8 +161,8 @@ const styles = {
     margin: '20px 0',
     padding: '10px 20px',
     borderRadius: '10px',
-    backgroundColor: '#fff',
-    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+    backgroundColor:"rgb(180, 104, 189)",
+    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)'
   },
   tank: {
     position: 'absolute',
@@ -196,7 +196,7 @@ const styles = {
     height: '150px',
     left: '50%',
     top: '50%',
-    transform: 'translate(-50%, -50%) scale(0.92)',
+    transform: 'translate(-50%, -50%) scale(0.95)',
     transition: 'transform 0.01s',
     backgroundColor: 'black', // Set background color to black
   },
@@ -206,6 +206,7 @@ const styles = {
     color: "rgb(250, 250, 235)",
     userSelect: 'none',
     pointerEvents: 'none',
+    fontWeight:"bold"
   },
 };
 
