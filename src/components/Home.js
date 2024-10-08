@@ -97,7 +97,7 @@ const DollarAirdrop = () => {
 
   return (
     <div style={styles.container}>
-      <div style={styles.counter}>Dollars Collected: {totalDollars}</div>
+      <div style={styles.counter}>Nats: {totalDollars}</div>
       <img 
         src={coinImage} 
         alt="Coin" 
@@ -161,7 +161,7 @@ const styles = {
     margin: '20px 0',
     padding: '10px 20px',
     borderRadius: '10px',
-    backgroundColor:"rgb(180, 104, 189)",
+    backgroundColor:"rgb(170, 163, 171)",
     boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)'
   },
   tank: {
@@ -196,7 +196,7 @@ const styles = {
     height: '150px',
     left: '50%',
     top: '50%',
-    transform: 'translate(-50%, -50%) scale(0.95)',
+    transform: 'translate(-50%, -50%) scale(0.97)',
     transition: 'transform 0.01s',
     backgroundColor: 'black', // Set background color to black
   },
