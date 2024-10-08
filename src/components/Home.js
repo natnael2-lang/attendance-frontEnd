@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import coinImage from '../images/NatCoinn1.jpg'; // Ensure your coin image path is correct
+import coinImage from '../images/NatCoinn-removebg-preview.png'; // Ensure your coin image path is correct
 
 const MAX_DOLLARS = 2000;
 const REGENERATION_TIME = 2 * 60 * 60 * 1000; // 2 hours in milliseconds
