@@ -128,7 +128,6 @@ const DollarAirdrop = () => {
           state: { username, userId },
         }}
       >
-       
       </Link>
       <style>
         {`
@@ -189,7 +188,7 @@ const styles = {
     top: '50%',
     transform: 'translate(-50%, -50%)',
     transition: 'transform 0.1s',
-    backgroundColor:"black"
+    backgroundColor: 'black', // Set background color to black
   },
   coinPressed: {
     position: 'absolute',
@@ -199,11 +198,12 @@ const styles = {
     top: '50%',
     transform: 'translate(-50%, -50%) scale(0.95)',
     transition: 'transform 0.1s',
+    backgroundColor: 'black', // Set background color to black
   },
   dollar: {
     position: 'absolute',
     fontSize: '15px',
-    color:"rgb(180,200,200)",
+    color: "rgb(180,200,200)",
     userSelect: 'none',
     pointerEvents: 'none',
   },
