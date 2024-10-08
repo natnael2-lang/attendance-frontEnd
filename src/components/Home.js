@@ -189,6 +189,7 @@ const styles = {
     top: '50%',
     transform: 'translate(-50%, -50%)',
     transition: 'transform 0.1s',
+    backgroundColor:"black"
   },
   coinPressed: {
     position: 'absolute',
