@@ -17,7 +17,7 @@ const Attendance = () => {
         
      const localStorageData=JSON.parse(localStorage.getItem("localStorage"));
       if(localStorageData){setAttendanceForm(localStorageData);return;}
-        fetch("https://chatgroup-backend.onrender.com/attendance")
+        fetch("https://attendance-server-buy0.onrender.com/attendance")
             .then((res) => res.json()) 
             .then((data) => {
                 if (!data) {
