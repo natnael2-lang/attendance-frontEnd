@@ -1,23 +1,32 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./components/Home"; // Import your components
-import Tasks from "./components/Task";
-import Friends from "./components/Friend";
-import Wallet from "./components/Wallet";
-import Navigation from "./components/Footer"; // Import the Navigation component
+import Navbar from "./components/Navbar";
+import Attendance from "./components/Attendance"
+import Modify from "./components/Modify"
+import Register from "./components/Register"
+import "./App.css"
+import ModifyInfo from "./components/ModifyInfo";
+import { ModifyProvider } from "./components/ModifyContex";
 
 const App = () => {
   return (
-    <div style={{ height: "100vh", overflowX: "hidden",display:"flex" ,flexDirection:"column"}}>
+    <div className="appContainer">
+      <ModifyProvider>
       <Router>
+         <Navbar />
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/tasks" element={<Tasks />} />
-          <Route path="/friends" element={<Friends />} />
-          <Route path="/wallet" element={<Wallet />} />
+
+        <Route path="/" element={<Register />} />
+        <Route path="/Attendance" element={<Attendance />} />
+
+        <Route path="/Modify" element={<Modify />} />
+        <Route path="/ModifyInfo" element={<ModifyInfo/>} />
+        <Route path="/Register" element={<Register />} />
+          
         </Routes>
-        <Navigation />
       </Router>
+      </ModifyProvider>
+      
     </div>
   );
 };

@@ -1,0 +1,106 @@
+.emptySpan{
+  padding: 5px;
+  border: 1px solid black;
+  width: 15px;
+  height: 5px;
+
+}
+.selectedSpan{
+    width: 25px;
+  height: 15px;
+    background-color: blue;
+}
+ul{ 
+    
+    list-style-type: none;
+    border: 1px solid lightgray;
+    border-radius: 20px;
+    margin-top: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+li{
+    display: flex;
+    padding: 0.9rem 5px;
+    
+}
+ul li div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.fname{
+    flex: 2;
+}
+.lname{
+    flex:2
+}
+.select{
+    flex: 1;
+}
+
+.attendanceContainer{
+    padding-top: 2.8rem;
+    width: 100%;
+    min-height:100vh;
+    padding-left: 20px;
+    padding-right: 20px;
+    
+}
+.header{
+    color: red;
+    font-size: 20px;
+    font-weight: 600;
+}
+.attendanceController{
+    width:100%;
+    height: 50px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    margin-top: 5px;
+    
+    border-radius: 20px;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+.completed{
+    padding:0.6rem 10px;
+    background-color: rgb(43, 238, 43);
+    border-radius: 5px;
+    border: none;
+    margin-right: 40px;
+}
+.info{
+    padding:0.6rem 10px;
+    border-radius: 5px;
+    border: none;
+    margin-right: 10px;
+    background-color: blue;
+
+}
+.newFormBtn{
+    padding: 20px 10px;
+    background-color: orange;
+    border-radius: 10px;
+    border: none;
+    animation:btnResize 2s infinite linear;
+    font-size: 20px;
+    font-family:'Times New Roman', Times, serif;
+    color: white;
+    
+}
+.newFormBtn:hover{
+    opacity: 0.9;
+}
+
+@keyframes btnResize{
+    0%{
+        transform: scale(1);
+
+    }
+    50%{
+        transform: scale(0.8); 
+    }
+    100%{
+        transform: scale(1);
+    }
+}

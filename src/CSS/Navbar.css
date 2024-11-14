@@ -1,0 +1,39 @@
+.headerContainer{
+font-size: 16px;
+line-height: 1.2em;
+position:relative;
+top: 0;
+width:600px;
+
+background-color: rgb(147, 147, 148);
+display: flex;
+display: flex;
+justify-content: center;
+align-items: center;
+gap: 50px;
+border-radius: 5px;
+padding: 0.9em 0;
+background-color:transparent;
+
+
+}
+
+.headerCorp{
+    width: 100%;
+    position:fixed;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    z-index: 999;
+    background-color: black;
+}
+@media (width<=600px) {
+    .headerContainer{
+       width: 100%;
+
+        justify-content: space-evenly;
+        gap:0;
+       
+    }
+}
+

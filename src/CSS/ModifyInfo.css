@@ -1,0 +1,16 @@
+.modifyH th{
+    color:black
+}
+.modifyH td{
+    color:white
+}
+.modifyInfoContainer{
+    background-color: black;
+    position: absolute;
+    z-index: 2000;
+    width: 100%;
+    min-height: 100vh;
+    padding-left: 20px;
+    padding-right: 20px;
+
+}

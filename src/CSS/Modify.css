@@ -1,0 +1,102 @@
+
+.modifyDiv{
+    width: 100%;
+    padding-top: 50px;
+    padding-left: 20px;
+    padding-right: 20px;
+    display: flex;
+    flex-direction: column;
+    height:100vh;
+    padding-bottom: 20px;
+  
+   
+
+   
+
+   
+}
+
+.info-btn{
+    border: none;
+    padding: 20px 40px;
+    border-radius: 5px;
+    background-color:greenyellow;
+    margin-bottom: 10px;
+    
+    font-weight: 900;
+    font-family: Arial, Helvetica, sans-serif;
+    
+
+}
+.info-btn:hover{
+    opacity: 0.8;
+}
+.info-div{
+    display: flex;
+    justify-content:end;
+    margin-right:40px;
+    width: 100%;
+  
+   
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+   
+   
+}
+.table-div{
+  border:3px solid rgb(34, 32, 32);
+    overflow-x: auto;
+   
+    
+    overflow-y:auto;
+   
+   
+}
+.table-div::-webkit-scrollbar-y{
+    width:20px ;
+    
+}
+.table-div::-webkit-scrollbar-x{
+    height: 10px;
+}
+.table-div::-webkit-scrollbar-thumb{
+ 
+    background-color:rgba(0,0,0,0.5);
+    border-radius: 3px;
+   
+   
+}
+.table-div::-webkit-scrollbar-track{
+    background-color: #ddd;
+    padding-top: 100px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding:8px;
+    text-align: center;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+thead tr{
+    position: sticky;
+    top: -1px;
+    z-index: 1000;
+ 
+  
+ 
+ 
+
+}
+
+img {
+    
+}
+tr:hover{
+    background-color: red;
+}
