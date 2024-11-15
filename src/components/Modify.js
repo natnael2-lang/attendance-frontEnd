@@ -130,7 +130,7 @@ const UserTable = () => {
                                         
                                     );
                                 })}
-                                <td style={{backgroundColor:"white"}} ><button style={{backgroundColor:"red",padding:"10px 20px"}} onClick={()=>handleDelete(user._id)}>delete</button></td>
+                                <td style={{backgroundColor:"white"}} ><button style={{backgroundColor:"red",padding:"10px 20px",borderRadius:"5px",border:"none"}} onClick={()=>handleDelete(user._id)}>delete</button></td>
                             </tr>
                         ))}
                     </tbody>
