@@ -33,6 +33,25 @@ const UserTable = () => {
 
         fetchUsers();
     }, []);
+    
+        const handleDelete = (id) => {
+            fetch(`https://attendance-server-buy0.onrender.com/delete/${id}`, {
+                method: "DELETE"
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json(); 
+            })
+            .then(() => {
+                const newData = users.filter(user => user._id !== id); 
+                setUsers(newData);
+            })
+            .catch(error => console.log("Failed to delete:", error));
+        }
+                  
+    
 
     const handleDownload = () => {
         const input = document.getElementById('table-to-pdf');
@@ -44,7 +63,7 @@ const UserTable = () => {
         html2canvas(input).then((canvas) => {
             const imgData = canvas.toDataURL('image/png');
             const pdf = new jsPDF();
-            const imgWidth = 190; // Adjust as necessary
+            const imgWidth = 190;
             const pageHeight = pdf.internal.pageSize.height;
             const imgHeight = (canvas.height * imgWidth) / canvas.width;
             let heightLeft = imgHeight;
@@ -108,8 +127,10 @@ const UserTable = () => {
                                         <td key={date}>
                                             {attendanceRecord ? (attendanceRecord.attend ? '✓' : '✗') : '-'}
                                         </td>
+                                        
                                     );
                                 })}
+                                <td ><button style={{backgroundColor:"red",padding:"10px 20px"}} onclick={()=>handleDelete(user._id)}>delete</button></td>
                             </tr>
                         ))}
                     </tbody>
