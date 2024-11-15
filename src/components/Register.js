@@ -12,6 +12,7 @@ const Register = () => {
     const [networkError, setNetworkError] = useState(null);
     const [somethingWentWrong, setSomethingWentWrong] = useState("");
     const [loading, setLoading] = useState(false);
+    const [success,setSuccess]=useState(false)
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -46,7 +47,10 @@ const Register = () => {
             setSex("");
             setPhone("");
             setImage("");
-            setSomethingWentWrong(""); 
+
+            setSomethingWentWrong("");
+            setSuccess(true)
+            setTimeout(()=>setSuccess(false),1000)
         })
         .catch((err) => {
             setLoading(false);
@@ -55,7 +59,9 @@ const Register = () => {
                 : "There is a network problem!";
             setSomethingWentWrong(errorMessage);
             setTimeout(() => setSomethingWentWrong(""), 3000); 
-        });
+        }).finally(
+            setSuccess(false)
+        );
     };
 
     const handleImage = (e) => {
@@ -65,7 +71,7 @@ const Register = () => {
 
     return (
         <>
-            <RegisterPop somethingWentWrong={somethingWentWrong} networkError={networkError} loading={loading} />
+            <RegisterPop somethingWentWrong={somethingWentWrong} networkError={networkError} loading={loading} success={success}/>
             <div className="registerContainer">
                 <form onSubmit={handleSubmit}>
                     <h1 style={{ textAlign: "center", color: "black" }}>Register</h1>
