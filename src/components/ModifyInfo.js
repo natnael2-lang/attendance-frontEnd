@@ -8,7 +8,8 @@ const ModifyInfo=()=>{
          const handleCount=(count)=>{
             let present=count.filter((data)=>data.attend==true).length;
             let absent=count.length-present;
-            return({present,absent})
+            let total=present +absent;
+            return({present,absent,total})
             
          }
          const sortedUsers = [...users].sort((a, b) => {
@@ -29,6 +30,7 @@ const ModifyInfo=()=>{
                  <th>lastName</th>
                  <th>present</th>
                  <th>absent</th>
+                 <th>Total</th>
               </tr>
              </thead>
              <tbody>
@@ -36,7 +38,7 @@ const ModifyInfo=()=>{
                  
                  sortedUsers.map((data,index)=>{
                      
-                    const {present,absent}=handleCount(data.attendance);
+                    const {present,absent,total}=handleCount(data.attendance);
                      
                      
                      return (
@@ -45,6 +47,7 @@ const ModifyInfo=()=>{
                    <td>{data.lastName}</td>
                    <td>{present}</td>
                    <td>{absent}</td>
+                   <td>{total}</td>
                 </tr>
  
  
