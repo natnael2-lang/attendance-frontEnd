@@ -26,7 +26,7 @@ const Register = () => {
         newForm.append("phone", phone);
         newForm.append("image", image);
 
-        fetch("https://attendance-server-buy0.onrender.com/register", {
+        fetch("https://attendance-server-aiwc.onrender.com/register", {
             method: 'POST',
             body: newForm
         })
