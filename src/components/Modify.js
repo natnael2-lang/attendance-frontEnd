@@ -13,7 +13,7 @@ const UserTable = () => {
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const response = await fetch("https://attendance-server-buy0.onrender.com/users");
+                const response = await fetch("https://attendance-server-aiwc.onrender.com/users");
                 const data = await response.json();
                 setUsers(data);
 
@@ -35,7 +35,7 @@ const UserTable = () => {
     }, []);
     
         const handleDelete = (id) => {
-            fetch(`https://attendance-server-buy0.onrender.com/delete/${id}`, {
+            fetch(`https://attendance-server-aiwc.onrender.com/delete/${id}`, {
                 method: "DELETE"
             })
             .then(response => {
